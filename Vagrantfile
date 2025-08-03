@@ -58,7 +58,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "web01" do |web01|
     web01.vm.box = "ubuntu/jammy64"
     web01.vm.hostname = "web01"
-    web01.vm.network "private_network", ip: "192.168.56.11"
+    web01.vm.network "private_network", ip: "va"
     web01.vm.provider "virtualbox" do |vb|
       vb.gui = true
       vb.memory = "800"
@@ -67,4 +67,16 @@ Vagrant.configure("2") do |config|
     # Provisioning with setup_nginx.sh script
     web01.vm.provision "shell", path: "nginx.sh", privileged: true
   end
+
+### Nagios VM ###
+  config.vm.define "nagios01" do |nagios01|
+    nagios01.vm.box = "eurolinux-vagrant/centos-stream-9"
+    nagios01.vm.hostname = "nagios01"
+  nagios01.vm.network "private_network", ip: "192.168.56.11"
+  nagios01.vm.provider "virtualbox" do |vb|
+     vb.gui = true
+     vb.memory = "2048"
+   end
+end
+
 end
